@@ -1,11 +1,9 @@
-// app/page.tsx
 import Sidebar from '@/components/Sidebar'; 
 import Header from '@/components/Header';
 import Filters from '@/components/Filters'; 
 import { OverviewCard } from '@/components/OverviewCard';
 import ProgressOverTime from '@/components/ProgressOverTime'; 
 import LeadsSummary from '@/components/LeadsSummary'; 
-// Note: Lucide icons are removed as requested, using image paths instead.
 
 export default function DashboardLayout() {
   return (
@@ -13,7 +11,7 @@ export default function DashboardLayout() {
       
       <Sidebar />
 
-      {/* 🚨 Margin updated to ml-[280px] to match the new expanded sidebar width */}
+      
       <div className="flex-1 ml-[280px] flex flex-col"> 
         
         <Header /> 

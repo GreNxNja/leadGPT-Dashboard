@@ -55,6 +55,9 @@ const config = {
           DEFAULT: "var(--card)",
           foreground: "var(--card-foreground)",
         },
+        
+        // gradientStart: "#5B4FDB", // darker purple
+        // gradientEnd: "#A08BFF",
       },
       borderRadius: {
         lg: "var(--radius)",
