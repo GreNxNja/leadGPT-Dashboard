@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { useSidebar } from "@/components/SidebarContext";
 
 function SidebarButton({ icon, label, isActive, isCollapsed, onClick }: any) {
   return (
@@ -17,7 +18,11 @@ function SidebarButton({ icon, label, isActive, isCollapsed, onClick }: any) {
         src={`/${icon}`}
         alt={label}
         className={`h-5 w-5 object-contain ${!isCollapsed ? "mr-3" : "mr-0"}`}
-        style={{ filter: isActive ? "brightness(0) saturate(100%) invert(100%)" : "none" }}
+        style={{
+          filter: isActive
+            ? "brightness(0) saturate(100%) invert(100%)"
+            : "none",
+        }}
       />
       {!isCollapsed && label}
     </Button>
@@ -25,7 +30,7 @@ function SidebarButton({ icon, label, isActive, isCollapsed, onClick }: any) {
 }
 
 export default function Sidebar() {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const { isCollapsed, setIsCollapsed } = useSidebar();
   const [activeItem, setActiveItem] = useState("Statistics");
 
   const menuItems = {
@@ -49,7 +54,7 @@ export default function Sidebar() {
 
   return (
     <aside
-      className={`${sidebarWidth} bg-white p-5 flex flex-col h-screen fixed left-0 top-0 border-r border-gray-200 transition-all duration-300`}
+      className={`${sidebarWidth} bg-white p-5 flex flex-col h-screen fixed left-0 top-0 border-r border-gray-200 transition-all duration-300 z-40`}
     >
       {/* Header */}
       <div
@@ -62,7 +67,11 @@ export default function Sidebar() {
             isCollapsed ? "opacity-0 w-0" : "opacity-100 w-auto"
           } transition-opacity duration-300 overflow-hidden`}
         >
-          <img src="/leadgptlogo.png" alt="LeadGPT Logo" className="w-8 h-8 object-contain" />
+          <img
+            src="/leadgptlogo.png"
+            alt="LeadGPT Logo"
+            className="w-8 h-8 object-contain"
+          />
           <img
             src="/leadgpt-text.png"
             alt="LEADGPT"
@@ -81,9 +90,17 @@ export default function Sidebar() {
           className="h-7 w-7 text-gray-500 hover:bg-gray-100 hover:text-gray-700 transition-colors duration-300"
         >
           {isCollapsed ? (
-            <img src="/sidebarLogoRight.png" alt="Expand Sidebar" className="h-4 w-4 object-contain" />
+            <img
+              src="/sidebarLogoRight.png"
+              alt="Expand Sidebar"
+              className="h-4 w-4 object-contain"
+            />
           ) : (
-            <img src="/sidebarLogoLeft.png" alt="Collapse Sidebar" className="h-4 w-4 object-contain" />
+            <img
+              src="/sidebarLogoLeft.png"
+              alt="Collapse Sidebar"
+              className="h-4 w-4 object-contain"
+            />
           )}
         </Button>
       </div>
@@ -133,10 +150,18 @@ export default function Sidebar() {
       <div className="mt-auto pt-4 space-y-3 border-t border-gray-100">
         {!isCollapsed && (
           <div className="bg-gray-50 p-3 rounded-lg flex items-center">
-            <img src="/amankaya.png" alt="Aman Kaya" className="h-9 w-9 rounded-full object-cover mr-3" />
+            <img
+              src="/amankaya.png"
+              alt="Aman Kaya"
+              className="h-9 w-9 rounded-full object-cover mr-3"
+            />
             <div className="min-w-0">
-              <p className="text-[10px] text-gray-500">Your LeadGPT expert is</p>
-              <p className="text-[13px] font-semibold text-gray-900 truncate">Aman Kaya</p>
+              <p className="text-[10px] text-gray-500">
+                Your LeadGPT expert is
+              </p>
+              <p className="text-[13px] font-semibold text-gray-900 truncate">
+                Aman Kaya
+              </p>
             </div>
           </div>
         )}
@@ -149,19 +174,32 @@ export default function Sidebar() {
                 variant="outline"
                 className="flex-1 h-8 text-xs bg-white border-gray-300 text-gray-700 hover:bg-gray-50 flex items-center justify-center gap-2"
               >
-                <img src="/emaillogo.png" alt="Email Icon" className="h-5 w-5 object-contain" />
+                <img
+                  src="/emaillogo.png"
+                  alt="Email Icon"
+                  className="h-5 w-5 object-contain"
+                />
                 Email
               </Button>
-              <Button
-                className="flex-1 h-8 text-xs text-white bg-violet-600 hover:bg-violet-700 flex items-center justify-center gap-2"
-              >
-                <img src="/meetlogo.png" alt="Meet Icon" className="h-5 w-5 object-contain" />
+              <Button className="flex-1 h-8 text-xs text-white bg-violet-600 hover:bg-violet-700 flex items-center justify-center gap-2">
+                <img
+                  src="/meetlogo.png"
+                  alt="Meet Icon"
+                  className="h-5 w-5 object-contain"
+                />
                 Meet
               </Button>
             </>
           ) : (
-            <Button size="icon" className="w-full h-8 bg-violet-600 hover:bg-violet-700">
-              <img src="/amankaya.png" alt="Aman Kaya" className="h-4 w-4 rounded-full object-cover" />
+            <Button
+              size="icon"
+              className="w-full h-8 bg-violet-600 hover:bg-violet-700"
+            >
+              <img
+                src="/amankaya.png"
+                alt="Aman Kaya"
+                className="h-4 w-4 rounded-full object-cover"
+              />
             </Button>
           )}
         </div>
@@ -171,7 +209,11 @@ export default function Sidebar() {
           variant="ghost"
           className={`w-full justify-start h-9 ${isCollapsed ? "justify-center px-0" : "px-3"} text-[13px] text-gray-700 hover:bg-gray-50`}
         >
-          <img src="/helplogo.png" alt="Help" className={`h-5 w-5 object-contain ${!isCollapsed ? "mr-3" : "mr-0"}`} />
+          <img
+            src="/helplogo.png"
+            alt="Help"
+            className={`h-5 w-5 object-contain ${!isCollapsed ? "mr-3" : "mr-0"}`}
+          />
           {!isCollapsed && "Help and Support"}
         </Button>
       </div>
