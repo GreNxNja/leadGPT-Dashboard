@@ -11,9 +11,7 @@ interface ChartDataPoint {
 }
 
 export default function LeadsSummary() {
-  const [hoverIndex, setHoverIndex] = useState<number | null | { bar: true }>(
-    null,
-  );
+  const [hoverIndex, setHoverIndex] = useState<number | null | "bottom">(null);
   const [tooltip, setTooltip] = useState({ x: 0, y: 0 });
 
   const data: ChartDataPoint[] = [
@@ -42,6 +40,7 @@ export default function LeadsSummary() {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     const w = 180;
+
     const left = x + w > rect.width ? x - w - 8 : x + 8;
     setTooltip({ x: left, y: y - 10 });
   };
@@ -60,7 +59,7 @@ export default function LeadsSummary() {
             className="absolute z-50 bg-white p-3 rounded-lg border border-gray-200 shadow-lg text-sm w-[180px] pointer-events-none"
             style={{ left: tooltip.x, top: tooltip.y }}
           >
-            {typeof hoverIndex === "object" && hoverIndex !== null ? (
+            {hoverIndex === "bottom" ? (
               <>
                 <TooltipRow
                   color="bg-purple-600"
@@ -159,11 +158,11 @@ export default function LeadsSummary() {
         <div
           className="mt-6 bg-white rounded-lg relative"
           onMouseMove={move}
-          onMouseEnter={() => setHoverIndex({ bar: true })}
+          onMouseEnter={() => setHoverIndex("bottom")}
           onMouseLeave={() => setHoverIndex(null)}
         >
           <div className="flex items-center gap-4 mb-4">
-            <div className="text-4xl font-bold text-gray-900">
+            <div className="text-2xl font-bold text-gray-900">
               {bottomData.purchased}
             </div>
             <div className="text-sm text-gray-600">Purchased</div>
